@@ -9,50 +9,20 @@ namespace BookLibrary
 {
     public class Book:IFormattable
     {
-        //TODO
-        private string title;
-        private string author;
-        private string year;
-        private string publishingHouse;
-        private string edidion;
-        private string pages;
-        private string price;
-
         public string Title
-        {
-            set { title = value; }
-            get { return title; }
-        }
+        {set; get; }
         public string Author
-        {
-            set { author = value; }
-            get { return author; }
-        }
+        { set; get; }
         public string Year
-        {
-            set { year = value; }
-            get { return year; }
-        }
+        { set; get; }
         public string PublishingHouse
-        {
-            set { publishingHouse = value; }
-            get { return publishingHouse; }
-        }
+        { set; get; }
         public string Edidion
-        {
-            set { edidion = value; }
-            get { return edidion; }
-        }
+        { set; get; }
         public string Pages
-        {
-            set { pages = value; }
-            get { return pages; }
-        }
+        { set; get; }
         public string Price
-        {
-            set { price = value; }
-            get { return price; }
-        }
+        { set; get; }
         public Book(string title, string author, string year, string publishingHouse, string edition, string pages, string price)
         {
             Title = title;
