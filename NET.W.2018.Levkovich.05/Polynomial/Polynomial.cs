@@ -72,22 +72,9 @@ namespace Logic
         /// Sum of polynomial
         /// </returns>
         public static Polynomial operator +(Polynomial left, Polynomial right)
-            {
-                double[] larger = new double[left.Degree + 1];
-                double[] smaller = new double[right.Degree + 1];
-                Array.Copy(left.Coefficients, larger, larger.Length);
-                Array.Copy(right.Coefficients, smaller, smaller.Length);
-                if (larger.Length < smaller.Length)
-                {
-                    larger = new double[right.Degree + 1];
-                    smaller = new double[left.Degree + 1];
-                    Array.Copy(right.Coefficients, larger, larger.Length);
-                    Array.Copy(left.Coefficients, smaller, smaller.Length);
-                }
-                for (int i = 0; i < smaller.Length; i++)
-                    larger[i] += smaller[i];
-                return new Polynomial(larger);
-            }
+        {
+           return Addition(left, right);
+        }
 
         /// <summary>
         /// The -.
@@ -102,29 +89,9 @@ namespace Logic
         /// Difference of polynomial
         /// </returns>
         public static Polynomial operator -(Polynomial left, Polynomial right)
-            {
-                double[] larger = new double[left.Degree + 1];
-                double[] smaller = new double[right.Degree + 1];
-                Array.Copy(left.Coefficients, larger, larger.Length);
-                Array.Copy(right.Coefficients, smaller, smaller.Length);
-                if (larger.Length < smaller.Length)
-                {
-                    larger = new double[right.Degree + 1];
-                    smaller = new double[left.Degree + 1];
-                    Array.Copy(right.Coefficients, larger, larger.Length);
-                    Array.Copy(left.Coefficients, smaller, smaller.Length);
-                }
-                for (int i = 0; i < smaller.Length; i++)
-                    larger[i] -= smaller[i];
-                if (right.Degree > left.Degree)
-                {
-                    for (int j = smaller.Length; j < larger.Length; j++)
-                    {
-                        larger[j] = -larger[j];
-                    }
-                }
-                return new Polynomial(larger);
-            }
+        {
+            return Subtraction(left, right);
+        }
 
         /// <summary>
         /// The *.
@@ -139,35 +106,9 @@ namespace Logic
         /// Multiplication of polynomial
         /// </returns>
         public static Polynomial operator *(Polynomial left, Polynomial right)
-            {
-                int length = left.Degree + right.Degree;
-                double[] result = new double[length + 1];
-                double[] larger = new double[left.Degree + 1];
-                double[] smaller = new double[right.Degree + 1];
-                Array.Copy(left.Coefficients, larger, larger.Length);
-                Array.Copy(right.Coefficients, smaller, smaller.Length);
-                if (larger.Length < smaller.Length)
-                {
-                    larger = new double[right.Degree + 1];
-                    smaller = new double[left.Degree + 1];
-                    Array.Copy(right.Coefficients, larger, larger.Length);
-                    Array.Copy(left.Coefficients, smaller, smaller.Length);
-                }
-                for (int i = 0; i < smaller.Length; i++)
-                {
-                    for (int j = 0; j < larger.Length; j++)
-                    {
-                        for (int k = 0; k < result.Length; k++)
-                        {
-                            if (i + j == k)
-                            {
-                                result[k] += (smaller[i] * larger[j]);
-                            }
-                        }
-                    }
-                }
-                return new Polynomial(result);
-            }
+        {
+            return Multiplication(left, right);
+        }
 
         /// <summary>
         /// The /.
@@ -182,14 +123,9 @@ namespace Logic
         /// Division of a polynomial by a number
         /// </returns>
         public static Polynomial operator /(Polynomial left, int right)
-            {
-                double[] result = new double[left.Degree + 1];
-                for (int i = 0; i < result.Length; i++)
-                {
-                    result[i] = result[i] / right;
-                }
-                return new Polynomial(result);
-            }
+        {
+            return Division(left, right);
+        }
 
         /// <summary>
         /// The /.
@@ -206,13 +142,9 @@ namespace Logic
         /// <exception cref="ArgumentException">
         /// </exception>
         public static Polynomial operator /(double right, Polynomial left)
-            {
-                if (left.Degree != 0)
-                    throw new ArgumentException();
-
-                double[] result = new double[1] { right / left.Coefficients[0] };
-                return new Polynomial(result);
-            }
+        {
+            return Division(right, left);
+        }
 
         /// <summary>
         /// The ==.
